@@ -1,2 +1,2 @@
 #!/bin/bash
-find $1 -perm -4000 -type f -mtime -30 -size +1M ! -iname '*.gz' 2>/dev/null
+find $1 -perm -4000 -type f -mtime -7 -size \+1M ! -iname '*.gz' 2>/dev/null
