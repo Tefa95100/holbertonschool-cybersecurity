@@ -1,5 +1,11 @@
 #!/bin/bash
-while read user
+while read user;
 do
-	id $user
-done $1
+	if id $user >/dev/null 2>&1;
+	then
+		echo "User $user locked"
+		usermod -L $user
+	else
+		echo "User $user not found"
+	fi
+done < $1
