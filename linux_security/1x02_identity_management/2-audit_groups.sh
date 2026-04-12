@@ -1,12 +1,8 @@
 #!/bin/bash
-awk -F: '($3 >= 1000){print $1}' $1 | while read user
+awk -F: '($3 >= 1000){print $1}' $1 | while read -r user
 do
-	groups=$(id -nG "$user")
-	for group in $groups
+	for group in docker disk shadow
 	do
-		if [ "$group" = "disk" ] || [ "$group" = "docker" ] || [ "$group" = "shadow" ]
-		then
-			echo "$user:$group"
-		fi
+		grep -E "^$group:[^:]*:[^:]*:([^,]*,)*$user(,|$)" /etc/group >/dev/null && echo "$user:$group"
 	done
 done
