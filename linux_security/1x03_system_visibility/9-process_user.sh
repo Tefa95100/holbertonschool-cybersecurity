@@ -1,2 +1,2 @@
 #!/bin/bash
-ps -o user= $1
+ps -o user= -p $1
