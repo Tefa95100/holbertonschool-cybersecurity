@@ -1,2 +1,2 @@
 #!/bin/bash
-test -e $1 && grep "segfault" $1
+test -e $1 && grep -i segfault $1
