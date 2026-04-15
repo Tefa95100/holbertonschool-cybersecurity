@@ -1,9 +1,11 @@
 #!/bin/bash
-if [ ! -f ./sentinel.conf ];
+FILE="./sentinel.conf"
+if [ ! -f "$FILE" ];
 then
 	exit 1
 fi
-if [ -z "$SERVICES" ] || [ -z "$FILES_TO_WATCH" ];
+source "$FILE"
+if [ -z "${SERVICES+x}" ] || [ -z "${FILES_TO_WATCH+x}" ];
 then
 	exit 1
 fi
