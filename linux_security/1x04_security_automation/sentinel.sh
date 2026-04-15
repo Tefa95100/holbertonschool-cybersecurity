@@ -1,5 +1,5 @@
 #!/bin/bash
-if [!-f ./sentinel.conf];
+if [ ! -f ./sentinel.conf ];
 then
-	exit1
+	exit 1
 fi
