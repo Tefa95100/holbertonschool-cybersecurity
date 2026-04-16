@@ -11,7 +11,7 @@ then
 fi
 
 check_services() {
-	for svc in "${SERVICES[0]}";
+	for svc in "${SERVICES[@]}";
 	do
 		if pgrep -f "$svc" > /dev/null;
 		then
