@@ -27,4 +27,18 @@ check_services() {
 	done 
 }
 
+check_integrity() {
+	for file in "${FILES_TO_WATCH[@]}";
+	do
+		if [ "$(md5sum "$file")" == "$(md5sum /var/backups/sentinel/"$(basename "$file")".gold)" ];
+		then
+			echo "OK: $file integrity verified"
+		else
+			cp /var/backups/sentinel/"$(basename "$file")".gold "$file"
+			echo "FIXED: Restored $file"
+		fi
+	done
+}
+
 check_services
+check_integrity
