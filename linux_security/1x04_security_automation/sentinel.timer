@@ -2,7 +2,7 @@
 Description=Run sentinel every 5 minute
 
 [Timer]
-OnActiveSec=5
+OnUnitActiveSec=5min
 
 [Install]
 WantedBy=timers.target
