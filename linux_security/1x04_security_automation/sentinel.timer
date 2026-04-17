@@ -1,0 +1,8 @@
+[Unit]
+Description=Run sentinel every 5 minute
+
+[Timer]
+OnActiveSec=5
+
+[Install]
+WantedBy=timers.target
