@@ -3,6 +3,7 @@ set -euo pipefail
 
 if [ "$(id -u)" -ne 0 ];
 then
+	echo "Permission denied: run as root."
 	exit 1
 fi
 
