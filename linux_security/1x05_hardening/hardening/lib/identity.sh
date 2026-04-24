@@ -64,11 +64,6 @@ set_faillock_policy() {
 		"pam_faillock.so authfail" \
 		"auth [default=die] pam_faillock.so authfail deny=${FAIL_LOCK_ATTEMPTS} unlock_time=900"
 
-	ensure_pam_module_line \
-		"/etc/pam.d/common-account" \
-		"pam_faillock.so" \
-		"account required pam_faillock.so"
-
 	log INFO "Faillock hardening completed"
 }
 
@@ -86,6 +81,13 @@ cleanup_users() {
 		if [ "$user" = "nobody" ]; then
 			continue
 		fi
+
+		for protected_user in "${PROTECTED_USERS[@]}"; do
+	if [ "$user" = "$protected_user" ]; then
+		log INFO "Protected user kept: $user"
+		continue 2
+	fi
+done
 
 		if id -nG "$user" 2>/dev/null | grep -qwE "sudo|wheel"; then
 			log INFO "Kept privileged user: $user"

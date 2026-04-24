@@ -1,0 +1,21 @@
+===============================================
+ HARDENING AUDIT REPORT - 2026-04-24 22:37:26
+===============================================
+
+[INFO] Hardening procedure completed.
+[INFO] SSH configured using: PasswordAuthentication no PubkeyAuthentication yes PermitRootLogin no
+[INFO] Firewall policy file: /etc/hardening/firewall.rules
+[INFO] Firewall allowed ports: 22 80 443
+[INFO] Kernel hardening: ip_forward=0, icmp_echo_ignore_all=1
+[INFO] Password policy: min length=12, max age=90 days
+[INFO] Lockout policy: 5 failed attempts
+[INFO] Security tools expected: auditd fail2ban
+[INFO] Bloatware expected removed: telnet ftp netcat-traditional
+
+[WARN] Package already absent: telnet
+[WARN] Package already absent: ftp
+[WARN] Package already absent: netcat-traditional
+
+===============================================
+ COMPLIANCE STATUS: PASS
+===============================================
