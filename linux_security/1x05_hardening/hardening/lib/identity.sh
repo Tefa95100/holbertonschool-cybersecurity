@@ -82,13 +82,6 @@ cleanup_users() {
 			continue
 		fi
 
-		for protected_user in "${PROTECTED_USERS[@]}"; do
-	if [ "$user" = "$protected_user" ]; then
-		log INFO "Protected user kept: $user"
-		continue 2
-	fi
-done
-
 		if id -nG "$user" 2>/dev/null | grep -qwE "sudo|wheel"; then
 			log INFO "Kept privileged user: $user"
 			continue
