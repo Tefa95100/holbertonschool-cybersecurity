@@ -2,7 +2,7 @@
 
 ensure_firewall_dir() {
 	mkdir -p "$(dirname "$FILE_FIREWALL")"
-	log "Ensured firewall policy directory exists: $(dirname "$FILE_FIREWALL")"
+	log INFO "Ensured firewall policy directory exists: $(dirname "$FILE_FIREWALL")"
 }
 write_firewall_rules() {
 	ensure_firewall_dir
@@ -24,10 +24,10 @@ write_firewall_rules() {
 	then
 		mv "$tmp_file" "$FILE_FIREWALL"
 		chmod 600 "$FILE_FIREWALL"
-		log "Firewall policy written to $FILE_FIREWALL"
+		log INFO "Firewall policy written to $FILE_FIREWALL"
 	else
 		rm -f "$tmp_file"
-		log "Firewall policy already compliant"
+		log INFO "Firewall policy already compliant"
 	fi
 }
 
@@ -38,19 +38,19 @@ ensure_sysctl_setting() {
 	if grep -qE "^[[:space:]]*${key}[[:space:]]*=" /etc/sysctl.conf;
 	then
 		sed -i "s|^[[:space:]]*${key}[[:space:]]*=.*|${key} = ${value}|" /etc/sysctl.conf
-		log "Updated sysctl setting: ${key} = ${value}"
+		log INFO "Updated sysctl setting: ${key} = ${value}"
 	else
 		echo "${key} = ${value}" >> /etc/sysctl.conf
-		log "Added sysctl setting: ${key} = ${value}"
+		log INFO "Added sysctl setting: ${key} = ${value}"
 	fi
 }
 
 network_hardening() {
-	log "Starting network hardening"
+	log INFO "Starting network hardening"
 
 	write_firewall_rules
 	ensure_sysctl_setting "net.ipv4.ip_forward" "$STATE_IP_FORWARD"
 	ensure_sysctl_setting "net.ipv4.icmp_echo_ignore_all" "$STATE_ICMP_ECHO"
 
-	log "Network hardening completed"
+	log INFO "Network hardening completed"
 }
