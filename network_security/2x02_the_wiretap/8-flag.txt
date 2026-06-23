@@ -1,1 +1,1 @@
-FLAG{0x004}
+FLAG{n0n3_sh4ll_p4ss}
